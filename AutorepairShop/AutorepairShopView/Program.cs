@@ -3,8 +3,9 @@ using System.Windows.Forms;
 using Unity;
 using AutorepairShopContracts.BusinessLogicsContracts;
 using AutorepairShopContracts.StoragesContracts;
-using AutorepairShopListImplement.Implements;
+using AutorepairShopFileImplement.Implements;
 using AutorepairShopBusinessLogic.BusinessLogics;
+using AutorepairShopFileImplement;
 using Unity.Lifetime;
 
 
@@ -30,11 +31,20 @@ namespace AutorepairShopView
         [STAThread]
         static void Main()
         {
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Application.ApplicationExit += ApplicationExit;
+            AppDomain.CurrentDomain.UnhandledException += (o, e) => { if (e.IsTerminating) ApplicationExit(null, null); };
+            Application.ThreadException += (o, e) => { Application.Exit(); };
+
             Application.Run(Container.Resolve<FormMain>());
         }
+        private static void ApplicationExit(object sender, EventArgs e)
+        {
+            FileDataListSingleton.SaveAll();//need to cut
+        }
+
         private static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
