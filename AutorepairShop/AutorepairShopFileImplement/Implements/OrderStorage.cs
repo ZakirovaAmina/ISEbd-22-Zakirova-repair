@@ -26,7 +26,7 @@ namespace AutorepairShopFileImplement.Implements
                 return null;
             }
             return source.Orders
-            .Where(rec => rec.RepairId.ToString().Contains(model.RepairId.ToString()))
+            .Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
             .Select(CreateModel).ToList();
         }
 
