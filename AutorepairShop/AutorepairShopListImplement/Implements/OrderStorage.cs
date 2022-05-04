@@ -33,7 +33,7 @@ namespace AutorepairShopListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.RepairId.ToString().Contains(model.RepairId.ToString()))
+                if (order.RepairId.ToString().Contains(model.RepairId.ToString()) || order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
                 {
                     result.Add(CreateModel(order));
                 }
