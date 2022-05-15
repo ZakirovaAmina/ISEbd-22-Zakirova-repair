@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutorepairShopContracts.BindingModels;
 using AutorepairShopContracts.BusinessLogicsContracts;
+using AutorepairShopBusinessLogic.BusinessLogics;
 using Unity;
 
 namespace AutorepairShopView
@@ -17,11 +18,15 @@ namespace AutorepairShopView
     {
         private readonly IOrderLogic _orderLogic;
         private readonly IReportLogic _reportLogic;
-        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic)
+        private readonly WorkModeling _workModeling;
+        private readonly IImplementerLogic _implementerLogic;
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, WorkModeling workModeling, IImplementerLogic implementerLogic)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
             _reportLogic = reportLogic;
+            _implementerLogic = implementerLogic;
+            _workModeling = workModeling;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -38,8 +43,8 @@ namespace AutorepairShopView
                     dataGridView.Rows.Clear();
                     foreach (var order in list)
                     {
-                        dataGridView.Rows.Add(new object[] { order.Id, order.RepairId, order.RepairName, order.ClientFIO, order.Count, order.Sum,
-                            order.Status,order.DateCreate, order.DateImplement});
+                        dataGridView.Rows.Add(new object[] { order.Id, order.RepairId, order.RepairName, order.ClientFIO, order.ImplementerFIO, order.Count, order.Sum,
+                            order.Status,order.DateCreate, order.DateImplement,  order.DateImplement});
                     }
                 }
             }
@@ -169,6 +174,18 @@ namespace AutorepairShopView
         {
             var form = Program.Container.Resolve<FormClients>();
             form.ShowDialog();  
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _workModeling.DoWork(_implementerLogic, _orderLogic);
+            LoadData();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormImplementers>();
+            form.ShowDialog();
         }
     }
 }
