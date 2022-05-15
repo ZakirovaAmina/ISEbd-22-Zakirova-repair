@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutorepairShopListImplement
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutorepairShopFileImplement", "..\AutorepairShopFileImplement\AutorepairShopFileImplement.csproj", "{58817556-1E9F-4419-A22F-CB410DAAC03F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutorepairShopDatabaseImplement", "..\AutorepairShopDatabaseImplement\AutorepairShopDatabaseImplement.csproj", "{0681897C-506E-41FB-AA9D-FA10181F58C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutorepairShopDatabaseImplement", "..\AutorepairShopDatabaseImplement\AutorepairShopDatabaseImplement.csproj", "{0681897C-506E-41FB-AA9D-FA10181F58C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutorepairShopRestApi", "..\AutorepairShopRestApi\AutorepairShopRestApi.csproj", "{B8B7E099-FBE6-4A45-9907-E77BF8312D04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutorepairShopClientApp", "..\AutorepairShopClientApp\AutorepairShopClientApp.csproj", "{4006A245-86D9-44DA-995E-2855D159B7BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{0681897C-506E-41FB-AA9D-FA10181F58C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0681897C-506E-41FB-AA9D-FA10181F58C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0681897C-506E-41FB-AA9D-FA10181F58C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B7E099-FBE6-4A45-9907-E77BF8312D04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B7E099-FBE6-4A45-9907-E77BF8312D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B7E099-FBE6-4A45-9907-E77BF8312D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B7E099-FBE6-4A45-9907-E77BF8312D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4006A245-86D9-44DA-995E-2855D159B7BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4006A245-86D9-44DA-995E-2855D159B7BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4006A245-86D9-44DA-995E-2855D159B7BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4006A245-86D9-44DA-995E-2855D159B7BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

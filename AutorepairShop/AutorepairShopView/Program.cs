@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Unity;
 using AutorepairShopContracts.BusinessLogicsContracts;
 using AutorepairShopContracts.StoragesContracts;
-using AutorepairShopFileImplement.Implements;
+using AutorepairShopDatabaseImplement.Implements;
 using AutorepairShopBusinessLogic.BusinessLogics;
 using AutorepairShopFileImplement;
 using Unity.Lifetime;
@@ -69,6 +69,10 @@ namespace AutorepairShopView
             currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientLogic, ClientLogic>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientStorage, ClientStorage>(new
             HierarchicalLifetimeManager());
             return currentContainer;
         }
