@@ -19,7 +19,6 @@ namespace AutorepairShopBusinessLogic.OfficePackage
                 Text = info.Title,
                 Style = "NormalTitle"
             });
-
             CreateParagraph(new PdfParagraph
             {
                 Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }",
@@ -28,7 +27,8 @@ namespace AutorepairShopBusinessLogic.OfficePackage
             CreateTable(new List<string> { "3cm", "6cm", "3cm", "2cm", "3cm" });
             CreateRow(new PdfRowParameters
             {
-                Texts = new List<string> { "Дата заказа", "Изделие", "Количество", "Сумма", "Статус" },
+                Texts = new List<string> { "Дата заказа", "Изделие", "Количество",
+"Сумма", "Статус" },
                 Style = "NormalTitle",
                 ParagraphAlignment = PdfParagraphAlignmentType.Center
             });
@@ -36,14 +36,19 @@ namespace AutorepairShopBusinessLogic.OfficePackage
             {
                 CreateRow(new PdfRowParameters
                 {
-                    Texts = new List<string> { order.DateCreate.ToShortDateString(), order.RepairName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString() },
+                    Texts = new List<string> { order.DateCreate.ToShortDateString(),
+order.RepairName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString()
+},
                     Style = "Normal",
                     ParagraphAlignment = PdfParagraphAlignmentType.Left
                 });
-
             }
             SavePdf(info);
         }
+        /// <summary>
+        /// Создание doc-файла
+        /// </summary>
+        /// <param name="info"></param>
         protected abstract void CreatePdf(PdfInfo info);
         /// <summary>
         /// Создание параграфа с текстом
@@ -68,6 +73,5 @@ namespace AutorepairShopBusinessLogic.OfficePackage
         /// <param name="info"></param>
         protected abstract void SavePdf(PdfInfo info);
     }
-
 
 }

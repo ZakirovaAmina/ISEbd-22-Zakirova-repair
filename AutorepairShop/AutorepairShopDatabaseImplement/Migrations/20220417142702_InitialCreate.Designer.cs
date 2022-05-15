@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutorepairShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(AutorepairShopDatabase))]
-    [Migration("20220307190852_InitialCreate")]
+    [Migration("20220417142702_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,30 @@ namespace AutorepairShopDatabaseImplement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.14")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClientFIO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
 
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Component", b =>
                 {
@@ -44,6 +68,9 @@ namespace AutorepairShopDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -63,6 +90,8 @@ namespace AutorepairShopDatabaseImplement.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("RepairId");
 
@@ -115,11 +144,21 @@ namespace AutorepairShopDatabaseImplement.Migrations
 
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Order", b =>
                 {
-                    b.HasOne("AutorepairShopDatabaseImplement.Models.Repair", null)
+                    b.HasOne("AutorepairShopDatabaseImplement.Models.Client", "Client")
+                        .WithMany("Orders")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AutorepairShopDatabaseImplement.Models.Repair", "Repair")
                         .WithMany("Order")
                         .HasForeignKey("RepairId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Repair");
                 });
 
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.RepairComponent", b =>
@@ -139,6 +178,11 @@ namespace AutorepairShopDatabaseImplement.Migrations
                     b.Navigation("Component");
 
                     b.Navigation("Repair");
+                });
+
+            modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Client", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Component", b =>

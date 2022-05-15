@@ -13,7 +13,6 @@ namespace AutorepairShopBusinessLogic.OfficePackage.Implements
 {
     public class SaveToPdf : AbstractSaveToPdf
     {
-        
         private Document _document;
         private Section _section;
         private Table _table;
@@ -25,7 +24,6 @@ namespace AutorepairShopBusinessLogic.OfficePackage.Implements
                 PdfParagraphAlignmentType.Center => ParagraphAlignment.Center,
                 PdfParagraphAlignmentType.Left => ParagraphAlignment.Left,
                 _ => ParagraphAlignment.Justify,
-
             };
         }
         /// <summary>
@@ -52,7 +50,6 @@ namespace AutorepairShopBusinessLogic.OfficePackage.Implements
             paragraph.Format.SpaceAfter = "1cm";
             paragraph.Format.Alignment = ParagraphAlignment.Center;
             paragraph.Style = pdfParagraph.Style;
-
         }
         protected override void CreateTable(List<string> columns)
         {
@@ -77,7 +74,8 @@ namespace AutorepairShopBusinessLogic.OfficePackage.Implements
                 row.Cells[i].Borders.Right.Width = borderWidth;
                 row.Cells[i].Borders.Top.Width = borderWidth;
                 row.Cells[i].Borders.Bottom.Width = borderWidth;
-                row.Cells[i].Format.Alignment = GetParagraphAlignment(rowParameters.ParagraphAlignment);
+                row.Cells[i].Format.Alignment =
+               GetParagraphAlignment(rowParameters.ParagraphAlignment);
                 row.Cells[i].VerticalAlignment = VerticalAlignment.Center;
             }
         }

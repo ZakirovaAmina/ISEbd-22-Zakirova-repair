@@ -18,11 +18,14 @@ namespace AutorepairShopView
     {
         private readonly IRepairLogic _logicP;
         private readonly IOrderLogic _logicO;
-        public FormCreateOrder(IRepairLogic logicP, IOrderLogic logicO)
+        private readonly IClientLogic _logicC;
+
+        public FormCreateOrder(IRepairLogic logicP, IOrderLogic logicO, IClientLogic logicC)
         {
             InitializeComponent();
             _logicP = logicP;
             _logicO = logicO;
+            _logicC = logicC;
         }
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
@@ -36,6 +39,14 @@ namespace AutorepairShopView
                     comboBoxRepair.ValueMember = "Id";
                     comboBoxRepair.DataSource = list;
                     comboBoxRepair.SelectedItem = null;
+                }
+                var listC = _logicC.Read(null);
+                foreach (var client in listC)
+                {
+                    comboBoxClient.DataSource = listC;
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.SelectedItem = null;
                 }
             }
             catch (Exception ex)
