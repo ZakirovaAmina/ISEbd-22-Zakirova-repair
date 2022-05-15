@@ -59,6 +59,28 @@ namespace AutorepairShopDatabaseImplement.Migrations
                     b.ToTable("Components");
                 });
 
+            modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Implementer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImplementerFIO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PauseTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkingTime")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Implementers");
+                });
+
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -78,6 +100,9 @@ namespace AutorepairShopDatabaseImplement.Migrations
                     b.Property<DateTime?>("DateImplement")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ImplementerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("RepairId")
                         .HasColumnType("int");
 
@@ -90,6 +115,8 @@ namespace AutorepairShopDatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("ImplementerId");
 
                     b.HasIndex("RepairId");
 
@@ -148,6 +175,10 @@ namespace AutorepairShopDatabaseImplement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AutorepairShopDatabaseImplement.Models.Implementer", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("ImplementerId");
+
                     b.HasOne("AutorepairShopDatabaseImplement.Models.Repair", "Repair")
                         .WithMany("Order")
                         .HasForeignKey("RepairId")
@@ -186,6 +217,11 @@ namespace AutorepairShopDatabaseImplement.Migrations
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Component", b =>
                 {
                     b.Navigation("RepairComponents");
+                });
+
+            modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Implementer", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Repair", b =>

@@ -58,6 +58,7 @@ namespace AutorepairShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 RepairId = order.RepairId,
+                ImplementerId = model.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -84,6 +85,7 @@ namespace AutorepairShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 RepairId = order.RepairId,
+                ImplementerId = model.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -106,6 +108,7 @@ namespace AutorepairShopBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 RepairId = order.RepairId,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

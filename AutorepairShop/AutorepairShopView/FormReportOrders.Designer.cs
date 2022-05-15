@@ -30,12 +30,12 @@ namespace AutorepairShopView
         private void InitializeComponent()
         {
             this.panel = new System.Windows.Forms.Panel();
-            this.buttonToPdf = new System.Windows.Forms.Button();
-            this.buttonMake = new System.Windows.Forms.Button();
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonMake = new System.Windows.Forms.Button();
+            this.buttonToPdf = new System.Windows.Forms.Button();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,26 +52,6 @@ namespace AutorepairShopView
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(800, 57);
             this.panel.TabIndex = 0;
-            // 
-            // buttonToPdf
-            // 
-            this.buttonToPdf.Location = new System.Drawing.Point(645, 14);
-            this.buttonToPdf.Name = "buttonToPdf";
-            this.buttonToPdf.Size = new System.Drawing.Size(95, 21);
-            this.buttonToPdf.TabIndex = 5;
-            this.buttonToPdf.Text = "В PDF";
-            this.buttonToPdf.UseVisualStyleBackColor = true;
-            this.buttonToPdf.Click += new System.EventHandler(this.buttonToPdf_Click);
-            // 
-            // buttonMake
-            // 
-            this.buttonMake.Location = new System.Drawing.Point(483, 14);
-            this.buttonMake.Name = "buttonMake";
-            this.buttonMake.Size = new System.Drawing.Size(100, 25);
-            this.buttonMake.TabIndex = 4;
-            this.buttonMake.Text = "Сформировать";
-            this.buttonMake.UseVisualStyleBackColor = true;
-            this.buttonMake.Click += new System.EventHandler(this.buttonMake_Click);
             // 
             // dateTimePickerTo
             // 
@@ -104,6 +84,26 @@ namespace AutorepairShopView
             this.label1.Size = new System.Drawing.Size(15, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "С";
+            // 
+            // buttonMake
+            // 
+            this.buttonMake.Location = new System.Drawing.Point(483, 14);
+            this.buttonMake.Name = "buttonMake";
+            this.buttonMake.Size = new System.Drawing.Size(100, 25);
+            this.buttonMake.TabIndex = 4;
+            this.buttonMake.Text = "Сформировать";
+            this.buttonMake.UseVisualStyleBackColor = true;
+            this.buttonMake.Click += new System.EventHandler(this.buttonMake_Click);
+            // 
+            // buttonToPdf
+            // 
+            this.buttonToPdf.Location = new System.Drawing.Point(645, 14);
+            this.buttonToPdf.Name = "buttonToPdf";
+            this.buttonToPdf.Size = new System.Drawing.Size(95, 21);
+            this.buttonToPdf.TabIndex = 5;
+            this.buttonToPdf.Text = "В PDF";
+            this.buttonToPdf.UseVisualStyleBackColor = true;
+            this.buttonToPdf.Click += new System.EventHandler(this.buttonToPdf_Click);
             // 
             // FormReportOrders
             // 
