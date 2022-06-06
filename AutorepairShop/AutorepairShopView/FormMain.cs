@@ -136,5 +136,17 @@ namespace AutorepairShopView
         {
             LoadData();
         }
+
+        private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormStorehouseReplenishment>();
+            form.ShowDialog();
+        }
+
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormStorehouses>();
+            form.ShowDialog();
+        }
     }
 }

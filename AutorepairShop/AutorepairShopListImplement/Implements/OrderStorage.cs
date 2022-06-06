@@ -114,6 +114,7 @@ namespace AutorepairShopListImplement.Implements
                 if (repair.Id == order.RepairId)
                 {
                     repairName = repair.RepairName;
+                    break;
                 }
             }
 

@@ -16,5 +16,6 @@ namespace AutorepairShopContracts.StoragesContracts
         void Insert(StorehouseBindingModel model);
         void Update(StorehouseBindingModel model);
         void Delete(StorehouseBindingModel model);
+        bool WriteOffFromStorehouses(Dictionary<int, (string, int)> components, int writeOffCount);
     }
 }

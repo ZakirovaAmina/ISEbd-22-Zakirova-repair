@@ -93,8 +93,6 @@ namespace AutorepairShopView
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
-        }
-
-       
+        }       
     }
 }
