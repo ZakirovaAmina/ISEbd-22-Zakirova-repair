@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutorepairShopBusinessLogic\AutorepairShopBusinessLogic.csproj" />
+    <ProjectReference Include="..\AutorepairShopFileImplement\AutorepairShopFileImplement.csproj" />
     <ProjectReference Include="..\AutorepairShopListImplement\AutorepairShopListImplement.csproj" />
   </ItemGroup>
 

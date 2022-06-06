@@ -14,5 +14,6 @@ namespace AutorepairShopContracts.BusinessLogicsContracts
         void CreateOrUpdate(StorehouseBindingModel model);
         void Delete(StorehouseBindingModel model);
         void Replenishment(StorehouseReplenishmentBindingModel model);
+
     }
 }

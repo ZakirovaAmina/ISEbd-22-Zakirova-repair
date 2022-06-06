@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutorepairShopView", "AutorepairShopView.csproj", "{F94DA1E9-9C5D-4056-8BBE-9F4D3415A4F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutorepairShopView", "AutorepairShopView.csproj", "{F94DA1E9-9C5D-4056-8BBE-9F4D3415A4F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutorepairShopContracts", "..\AutorepairShopContracts\AutorepairShopContracts.csproj", "{CCC5DDF8-1611-4C3E-8636-DEDD10091115}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutorepairShopContracts", "..\AutorepairShopContracts\AutorepairShopContracts.csproj", "{CCC5DDF8-1611-4C3E-8636-DEDD10091115}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutorepairShopBusinessLogic", "..\AutorepairShopBusinessLogic\AutorepairShopBusinessLogic.csproj", "{BF0C169B-8A1B-48DD-B47B-E2C57C70C54B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutorepairShopBusinessLogic", "..\AutorepairShopBusinessLogic\AutorepairShopBusinessLogic.csproj", "{BF0C169B-8A1B-48DD-B47B-E2C57C70C54B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutorepairShopListImplement", "..\AutorepairShopListImplement\AutorepairShopListImplement.csproj", "{586260EA-CF31-43AB-8C00-D713B10DEDCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutorepairShopListImplement", "..\AutorepairShopListImplement\AutorepairShopListImplement.csproj", "{586260EA-CF31-43AB-8C00-D713B10DEDCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutorepairShopFileImplement", "..\AutorepairShopFileImplement\AutorepairShopFileImplement.csproj", "{2C03A38A-D8F9-4D48-A1BC-988BF1C5EAF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{586260EA-CF31-43AB-8C00-D713B10DEDCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{586260EA-CF31-43AB-8C00-D713B10DEDCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{586260EA-CF31-43AB-8C00-D713B10DEDCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C03A38A-D8F9-4D48-A1BC-988BF1C5EAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C03A38A-D8F9-4D48-A1BC-988BF1C5EAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C03A38A-D8F9-4D48-A1BC-988BF1C5EAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C03A38A-D8F9-4D48-A1BC-988BF1C5EAF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

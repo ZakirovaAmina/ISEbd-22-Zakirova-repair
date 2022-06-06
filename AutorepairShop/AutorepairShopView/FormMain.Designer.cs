@@ -30,15 +30,6 @@ namespace AutorepairShopView
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.DirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RepairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonCreateOrder = new System.Windows.Forms.Button();
-            this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
-            this.buttonOrderReady = new System.Windows.Forms.Button();
-            this.buttonIssuedOrder = new System.Windows.Forms.Button();
-            this.buttonRef = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDRepair = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Repair = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,8 +38,19 @@ namespace AutorepairShopView
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateCreation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateCompletion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.DirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RepairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.складыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пополнитьСкладToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonCreateOrder = new System.Windows.Forms.Button();
+            this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
+            this.buttonOrderReady = new System.Windows.Forms.Button();
+            this.buttonIssuedOrder = new System.Windows.Forms.Button();
+            this.buttonRef = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -69,21 +71,65 @@ namespace AutorepairShopView
             this.dataGridView.Size = new System.Drawing.Size(645, 407);
             this.dataGridView.TabIndex = 0;
             // 
-            // menuStrip1
+            // Id
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DirectoryToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(811, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "Справочник";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // IDRepair
+            // 
+            this.IDRepair.HeaderText = "IDRepair";
+            this.IDRepair.Name = "IDRepair";
+            this.IDRepair.Visible = false;
+            // 
+            // Repair
+            // 
+            this.Repair.HeaderText = "Ремонт";
+            this.Repair.Name = "Repair";
+            // 
+            // Count
+            // 
+            this.Count.HeaderText = "Количество";
+            this.Count.Name = "Count";
+            // 
+            // Sum
+            // 
+            this.Sum.HeaderText = "Сумма";
+            this.Sum.Name = "Sum";
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Статус";
+            this.Status.Name = "Status";
+            // 
+            // DateCreation
+            // 
+            this.DateCreation.HeaderText = "Дата создания";
+            this.DateCreation.Name = "DateCreation";
+            // 
+            // DateCompletion
+            // 
+            this.DateCompletion.HeaderText = "Дата выполнения";
+            this.DateCompletion.Name = "DateCompletion";
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DirectoryToolStripMenuItem,
+            this.пополнитьСкладToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(811, 24);
+            this.menuStrip.TabIndex = 1;
+            this.menuStrip.Text = "Справочник";
             // 
             // DirectoryToolStripMenuItem
             // 
             this.DirectoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ComponentsToolStripMenuItem,
-            this.RepairToolStripMenuItem});
+            this.RepairToolStripMenuItem,
+            this.складыToolStripMenuItem});
             this.DirectoryToolStripMenuItem.Name = "DirectoryToolStripMenuItem";
             this.DirectoryToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.DirectoryToolStripMenuItem.Text = "Справочник";
@@ -91,16 +137,30 @@ namespace AutorepairShopView
             // ComponentsToolStripMenuItem
             // 
             this.ComponentsToolStripMenuItem.Name = "ComponentsToolStripMenuItem";
-            this.ComponentsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.ComponentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ComponentsToolStripMenuItem.Text = "Материалы";
             this.ComponentsToolStripMenuItem.Click += new System.EventHandler(this.ComponentsToolStripMenuItem_Click);
             // 
             // RepairToolStripMenuItem
             // 
             this.RepairToolStripMenuItem.Name = "RepairToolStripMenuItem";
-            this.RepairToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.RepairToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.RepairToolStripMenuItem.Text = "Ремонт";
             this.RepairToolStripMenuItem.Click += new System.EventHandler(this.RepairToolStripMenuItem_Click);
+            // 
+            // складыToolStripMenuItem
+            // 
+            this.складыToolStripMenuItem.Name = "складыToolStripMenuItem";
+            this.складыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.складыToolStripMenuItem.Text = "Склады";
+            this.складыToolStripMenuItem.Click += new System.EventHandler(this.складыToolStripMenuItem_Click);
+            // 
+            // пополнитьСкладToolStripMenuItem
+            // 
+            this.пополнитьСкладToolStripMenuItem.Name = "пополнитьСкладToolStripMenuItem";
+            this.пополнитьСкладToolStripMenuItem.Size = new System.Drawing.Size(129, 20);
+            this.пополнитьСкладToolStripMenuItem.Text = "Пополнение склада";
+            this.пополнитьСкладToolStripMenuItem.Click += new System.EventHandler(this.пополнитьСкладToolStripMenuItem_Click);
             // 
             // buttonCreateOrder
             // 
@@ -152,48 +212,6 @@ namespace AutorepairShopView
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
             // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
-            // 
-            // IDRepair
-            // 
-            this.IDRepair.HeaderText = "IDRepair";
-            this.IDRepair.Name = "IDRepair";
-            this.IDRepair.Visible = false;
-            // 
-            // Repair
-            // 
-            this.Repair.HeaderText = "Ремонт";
-            this.Repair.Name = "Repair";
-            // 
-            // Count
-            // 
-            this.Count.HeaderText = "Количество";
-            this.Count.Name = "Count";
-            // 
-            // Sum
-            // 
-            this.Sum.HeaderText = "Сумма";
-            this.Sum.Name = "Sum";
-            // 
-            // Status
-            // 
-            this.Status.HeaderText = "Статус";
-            this.Status.Name = "Status";
-            // 
-            // DateCreation
-            // 
-            this.DateCreation.HeaderText = "Дата создания";
-            this.DateCreation.Name = "DateCreation";
-            // 
-            // DateCompletion
-            // 
-            this.DateCompletion.HeaderText = "Дата выполнения";
-            this.DateCompletion.Name = "DateCompletion";
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -205,14 +223,14 @@ namespace AutorepairShopView
             this.Controls.Add(this.buttonTakeOrderInWork);
             this.Controls.Add(this.buttonCreateOrder);
             this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "FormMain";
             this.Text = "Автомастерская";
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,7 +239,7 @@ namespace AutorepairShopView
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem DirectoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ComponentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RepairToolStripMenuItem;
@@ -238,5 +256,7 @@ namespace AutorepairShopView
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateCreation;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateCompletion;
+        private System.Windows.Forms.ToolStripMenuItem пополнитьСкладToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem;
     }
 }

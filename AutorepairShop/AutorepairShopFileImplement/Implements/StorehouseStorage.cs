@@ -6,25 +6,21 @@ using System.Threading.Tasks;
 using AutorepairShopContracts.BindingModels;
 using AutorepairShopContracts.StoragesContracts;
 using AutorepairShopContracts.ViewModels;
-using AutorepairShopListImplement.Models;
+using AutorepairShopFileImplement.Models;
+using AutorepairShopFileImplement;
 
-namespace AutorepairShopListImplement.Implements
+namespace AutorepairShopFileImplement.Implements
 {
     public class StorehouseStorage : IStorehouseStorage
     {
-        private readonly DataListSingleton source;
+        private readonly FileDataListSingleton source;
         public StorehouseStorage()
         {
-            source = DataListSingleton.GetInstance();
+            source = FileDataListSingleton.GetInstance();
         }
         public List<StorehouseViewModel> GetFullList()
         {
-            List<StorehouseViewModel> result = new List<StorehouseViewModel>();
-            foreach (var storehouse in source.Storehouses)
-            {
-                result.Add(CreateModel(storehouse));
-            }
-            return result;
+            return source.Storehouses.Select(CreateModel).ToList();
         }
         public List<StorehouseViewModel> GetFilteredList(StorehouseBindingModel model)
         {
@@ -32,15 +28,7 @@ namespace AutorepairShopListImplement.Implements
             {
                 return null;
             }
-            List<StorehouseViewModel> result = new List<StorehouseViewModel>();
-            foreach (var storehouse in source.Storehouses)
-            {
-                if (storehouse.StorehouseName.Contains(model.StorehouseName))
-                {
-                    result.Add(CreateModel(storehouse));
-                }
-            }
-            return result;
+            return source.Storehouses.Where(rec => rec.StorehouseName.ToString().Contains(model.StorehouseName.ToString())).Select(CreateModel).ToList();
         }
         public StorehouseViewModel GetElement(StorehouseBindingModel model)
         {
@@ -48,61 +36,44 @@ namespace AutorepairShopListImplement.Implements
             {
                 return null;
             }
-            foreach (var storehouse in source.Storehouses)
-            {
-                if (storehouse.Id == model.Id || storehouse.StorehouseName == model.StorehouseName)
-                {
-                    return CreateModel(storehouse);
-                }
-            }
-            return null;
+            var storehouse = source.Storehouses
+            .FirstOrDefault(rec => rec.StorehouseName == model.StorehouseName || rec.Id
+           == model.Id);
+            return storehouse != null ? CreateModel(storehouse) : null;
         }
         public void Insert(StorehouseBindingModel model)
         {
-            var tempStorehouse = new Storehouse
+            int maxId = source.Storehouses.Count > 0 ? source.Storehouses.Max(rec => rec.Id) : 0;
+            var element = new Storehouse
             {
-                Id = 1,
+                Id = maxId + 1,
                 StorehouseComponents = new Dictionary<int, int>(),
                 DateCreate = DateTime.Now
             };
-            foreach (var storehouse in source.Storehouses)
-            {
-                if (storehouse.Id >= tempStorehouse.Id)
-                {
-                    tempStorehouse.Id = storehouse.Id + 1;
-                }
-            }
-            source.Storehouses.Add(CreateModel(model, tempStorehouse));
+            source.Storehouses.Add(CreateModel(model, element));
         }
         public void Update(StorehouseBindingModel model)
         {
-            Storehouse tempStorehouse = null;
-            foreach (var storehouse in source.Storehouses)
-            {
-                if (storehouse.Id == model.Id)
-                {
-                    tempStorehouse = storehouse;
-                }
-            }
-            if (tempStorehouse == null)
+            var element = source.Storehouses.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            CreateModel(model, tempStorehouse);
+            CreateModel(model, element);
         }
         public void Delete(StorehouseBindingModel model)
         {
-            for (int i = 0; i < source.Storehouses.Count; ++i)
+            Storehouse element = source.Storehouses.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element != null)
             {
-                if (source.Storehouses[i].Id == model.Id)
-                {
-                    source.Storehouses.RemoveAt(i);
-                    return;
-                }
+                source.Storehouses.Remove(element);
             }
-            throw new Exception("Элемент не найден");
+            else
+            {
+                throw new Exception("Элемент не найден");
+            }
         }
-        private Storehouse CreateModel(StorehouseBindingModel model, Storehouse storehouse)
+        private static Storehouse CreateModel(StorehouseBindingModel model, Storehouse storehouse)
         {
             storehouse.StorehouseName = model.StorehouseName;
             storehouse.ResponsiblePerson = model.ResponsiblePerson;
@@ -131,28 +102,16 @@ namespace AutorepairShopListImplement.Implements
         }
         private StorehouseViewModel CreateModel(Storehouse storehouse)
         {
-            // требуется дополнительно получить список компонентов для изделия с названиями и их количество
-            Dictionary<int, (string, int)> storehouseComponents = new Dictionary<int, (string, int)>();
-            foreach (var wc in storehouse.StorehouseComponents)
-            {
-                string componentName = string.Empty;
-                foreach (var component in source.Components)
-                {
-                    if (wc.Key == component.Id)
-                    {
-                        componentName = component.ComponentName;
-                        break;
-                    }
-                }
-                storehouseComponents.Add(wc.Key, (componentName, wc.Value));
-            }
             return new StorehouseViewModel
             {
                 Id = storehouse.Id,
                 StorehouseName = storehouse.StorehouseName,
                 ResponsiblePerson = storehouse.ResponsiblePerson,
                 DateCreate = storehouse.DateCreate,
-                StorehouseComponents = storehouseComponents
+                StorehouseComponents = storehouse.StorehouseComponents
+                            .ToDictionary(recPC => recPC.Key, recPC =>
+                        (source.Components.FirstOrDefault(recC => recC.Id ==
+                 recPC.Key)?.ComponentName, recPC.Value))
             };
         }
         public bool WriteOffFromStorehouses(Dictionary<int, (string, int)> components, int writeOffCount)
@@ -169,18 +128,18 @@ namespace AutorepairShopListImplement.Implements
             foreach (var component in components)
             {
                 int count = component.Value.Item2 * writeOffCount;
-                IEnumerable<Storehouse> warehouses = source.Storehouses.Where(comp => comp.StorehouseComponents.ContainsKey(component.Key));
+                IEnumerable<Storehouse> storehouses = source.Storehouses.Where(comp => comp.StorehouseComponents.ContainsKey(component.Key));
 
-                foreach (Storehouse warehouse in warehouses)
+                foreach (Storehouse storehouse in storehouses)
                 {
-                    if (warehouse.StorehouseComponents[component.Key] <= count)
+                    if (storehouse.StorehouseComponents[component.Key] <= count)
                     {
-                        count -= warehouse.StorehouseComponents[component.Key];
-                        warehouse.StorehouseComponents.Remove(component.Key);
+                        count -= storehouse.StorehouseComponents[component.Key];
+                        storehouse.StorehouseComponents.Remove(component.Key);
                     }
                     else
                     {
-                        warehouse.StorehouseComponents[component.Key] -= count;
+                        storehouse.StorehouseComponents[component.Key] -= count;
                         count = 0;
                     }
                     if (count == 0)

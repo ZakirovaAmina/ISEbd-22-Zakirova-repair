@@ -73,8 +73,6 @@ namespace AutorepairShopView
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }
-
-       
+        }       
     }
 }

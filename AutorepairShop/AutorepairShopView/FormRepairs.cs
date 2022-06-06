@@ -55,6 +55,12 @@ namespace AutorepairShopView
 
         private void buttonUpd_Click(object sender, EventArgs e)
         {
+            LoadData();
+        }
+
+        private void buttonRef_Click(object sender, EventArgs e)
+        {
+            
             if (dataGridViewRepair.SelectedRows.Count == 1)
             {
                 var form = Program.Container.Resolve<FormRepair>();
@@ -64,11 +70,6 @@ namespace AutorepairShopView
                     LoadData();
                 }
             }
-        }
-
-        private void buttonRef_Click(object sender, EventArgs e)
-        {
-            LoadData();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
