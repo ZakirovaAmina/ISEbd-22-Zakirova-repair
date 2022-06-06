@@ -44,11 +44,9 @@ namespace AutorepairShopClientApp.Controllers
         [HttpPost]
         public void Privacy(string login, string password, string fio)
         {
-            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password)
-            && !string.IsNullOrEmpty(fio))
+            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(fio))
             {
-                APIClient.PostRequest("api/client/updatedata", new
-                ClientBindingModel
+                APIClient.PostRequest("api/client/updatedata", new ClientBindingModel
                 {
                     Id = Program.Client.Id,
                     ClientFIO = fio,
@@ -103,6 +101,7 @@ namespace AutorepairShopClientApp.Controllers
                 APIClient.PostRequest("api/client/register", new
                 ClientBindingModel
                 {
+
                     ClientFIO = fio,
                     Email = login,
                     Password = password
@@ -140,6 +139,14 @@ namespace AutorepairShopClientApp.Controllers
         {
             RepairViewModel rep = APIClient.GetRequest<RepairViewModel>($"api/main/getrepair?repairId={repair}");
             return count * rep.Price;
+        }
+        public IActionResult Mail()
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}"));
         }
 
     }

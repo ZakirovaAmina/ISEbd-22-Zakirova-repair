@@ -10,7 +10,7 @@ namespace AutorepairShopDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=AutorepairShopDatabase2;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=AutorepairShopDatabase5;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -20,5 +20,6 @@ namespace AutorepairShopDatabaseImplement
         public virtual DbSet<Order> Orders { set; get; }
         public virtual DbSet<Client> Clients { set; get; }
         public virtual DbSet<Implementer> Implementers { set; get; }
+        public virtual DbSet<MessageInfo> MessageInfoes { set; get; }
     }
 }

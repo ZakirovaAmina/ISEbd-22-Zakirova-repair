@@ -15,16 +15,26 @@ namespace AutorepairShopFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string RepairFileName = "Repair.xml";
         private readonly string ClientFileName = "Client.xml";
+        private readonly string ImplementerFileName = "Implementer.xml";
+        private readonly string MessageInfoFileName = "MessageInfo.xml";
+
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Repair> Repairs { get; set; }
         public List<Client> Clients { get; set; }
+        public List<Implementer> Implementers { get; set; }
+        public List<MessageInfo> MessageInfoes { get; set; }
+
+
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Repairs = LoadProducts();
             Clients = LoadClients();
+            MessageInfoes = LoadMessageInfoes();
+            Implementers = LoadImplementers();
+
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -34,12 +44,15 @@ namespace AutorepairShopFileImplement
             }
             return instance;
         }
-        public static void SaveAll() // need to cut
+        public static void SaveAll() 
         {
             GetInstance().SaveComponents();
             GetInstance().SaveRepairs();
             GetInstance().SaveOrders();
             GetInstance().SaveClients();
+            GetInstance().SaveMessageInfoes();
+            GetInstance().SaveImplementers();
+
         }
         private List<Component> LoadComponents()
         {
@@ -90,7 +103,9 @@ namespace AutorepairShopFileImplement
                     list.Add(new Order
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         RepairId = Convert.ToInt32(elem.Element("RepairId").Value),
+                        ImplementerId = Convert.ToInt32(elem.Element("ImplementerId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                         Status = status,
@@ -143,6 +158,52 @@ namespace AutorepairShopFileImplement
                         ClientFIO = elem.Element("ClientFIO").Value,
                         Email = elem.Element("Email").Value,
                         Password = elem.Element("Password").Value,
+                    });
+                }
+            }
+            return list;
+        }
+        private List<Implementer> LoadImplementers()
+        {
+            var list = new List<Implementer>();
+
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Implementer").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ImplementerFIO = elem.Element("ImplementerFIO").Value,
+                        WorkingTime = Convert.ToInt32(elem.Element("WorkingTime").Value),
+                        PauseTime = Convert.ToInt32(elem.Element("PauseTime").Value),
+                    });
+                }
+            }
+            return list;
+        }
+        private List<MessageInfo> LoadMessageInfoes()
+        {
+            var list = new List<MessageInfo>();
+
+            if (File.Exists(MessageInfoFileName))
+            {
+                XDocument xDocument = XDocument.Load(MessageInfoFileName);
+                var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new MessageInfo
+                    {
+                        MessageId = elem.Attribute("MessageId").Value,
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+                        SenderName = elem.Element("SenderName").Value,
+                        DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery")?.Value),
+                        Subject = elem.Element("Subject").Value,
+                        Body = elem.Element("Body").Value,
                     });
                 }
             }
@@ -226,6 +287,47 @@ namespace AutorepairShopFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ClientFileName);
+            }
+        }
+        private void SaveImplementers()
+        {
+            if (Implementers != null)
+            {
+                var xElement = new XElement("Implementers");
+
+                foreach (var implementer in Implementers)
+                {
+                    xElement.Add(new XElement("Implementer",
+                    new XAttribute("Id", implementer.Id),
+                    new XElement("ImplementerFIO", implementer.ImplementerFIO),
+                    new XElement("WorkingTime", implementer.WorkingTime),
+                    new XElement("PauseTime", implementer.PauseTime)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ImplementerFileName);
+            }
+        }
+        private void SaveMessageInfoes()
+        {
+            if (MessageInfoes != null)
+            {
+                var xElement = new XElement("MessageInfoes");
+
+                foreach (var message in MessageInfoes)
+                {
+                    xElement.Add(new XElement("MessageInfo",
+                    new XAttribute("MessageId", message.MessageId),
+                    new XElement("ClientId", message.ClientId),
+                    new XElement("SenderName", message.SenderName),
+                    new XElement("DateDelivery", message.DateDelivery),
+                    new XElement("Subject", message.Subject),
+                    new XElement("Body", message.Body)
+                    ));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(MessageInfoFileName);
             }
         }
     }
