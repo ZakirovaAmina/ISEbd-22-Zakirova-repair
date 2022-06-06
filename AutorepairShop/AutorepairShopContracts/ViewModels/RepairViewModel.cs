@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutorepairShopContracts.Attributes;
 
 namespace AutorepairShopContracts.ViewModels
 {
@@ -13,9 +14,9 @@ namespace AutorepairShopContracts.ViewModels
     public class RepairViewModel
     {
         public int Id { get; set; }
-        [DisplayName("Название изделия")]
+        [Column(title: "Название ремонта", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string RepairName { get; set; }
-        [DisplayName("Цена")]
+        [Column(title: "Цена", width: 100)]
         public decimal Price { get; set; }
         public Dictionary<int, (string, int)> RepairComponents { get; set; }
     }

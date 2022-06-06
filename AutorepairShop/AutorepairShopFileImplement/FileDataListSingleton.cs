@@ -23,6 +23,7 @@ namespace AutorepairShopFileImplement
         public List<Repair> Repairs { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
+
         public List<MessageInfo> MessageInfoes { get; set; }
 
 
@@ -52,6 +53,7 @@ namespace AutorepairShopFileImplement
             GetInstance().SaveClients();
             GetInstance().SaveMessageInfoes();
             GetInstance().SaveImplementers();
+
 
         }
         private List<Component> LoadComponents()

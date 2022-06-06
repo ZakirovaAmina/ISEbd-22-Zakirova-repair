@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using AutorepairShopContracts.Attributes;
 
 namespace AutorepairShopContracts.ViewModels
 {
    public class ClientViewModel
     {
         public int Id { get; set; }
-        [DisplayName("ФИО клиента")]
+        [Column(title: "ФИО", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ClientFIO { get; set; }
-        [DisplayName("Электронная почта")]
+        [Column(title: "Логин", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Email { get; set; }
-        [DisplayName("Пароль")]
+        [Column(title: "Пароль", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Password { get; set; }
     }
 }
