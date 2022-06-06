@@ -1,15 +1,21 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
+using System.Threading;
+using System.Configuration;
 using AutorepairShopContracts.BusinessLogicsContracts;
 using AutorepairShopContracts.StoragesContracts;
-using AutorepairShopDatabaseImplement.Implements;
+using AutorepairShopContracts.BindingModels;
 using AutorepairShopBusinessLogic.BusinessLogics;
-using AutorepairShopFileImplement;
+using AutorepairShopBusinessLogic.MailWorker;
+using Unity;
 using Unity.Lifetime;
 using AutorepairShopBusinessLogic.OfficePackage;
 using AutorepairShopBusinessLogic.OfficePackage.Implements;
-
+using AutorepairShopDatabaseImplement;
+using AutorepairShopDatabaseImplement.Implements;
 
 namespace AutorepairShopView
 {
@@ -33,6 +39,18 @@ namespace AutorepairShopView
         [STAThread]
         static void Main()
         {
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            var mailSender = Container.Resolve<AbstractMailWorker>();
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = ConfigurationManager.AppSettings["MailLogin"],
+                MailPassword = ConfigurationManager.AppSettings["MailPassword"],
+                SmtpClientHost = ConfigurationManager.AppSettings["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
+                PopHost = ConfigurationManager.AppSettings["PopHost"],
+                PopPort = Convert.ToInt32(ConfigurationManager.AppSettings["PopPort"])
+            });
+            var timer = new System.Threading.Timer(new TimerCallback(MailCheck), null, 0, 100000);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -74,14 +92,20 @@ namespace AutorepairShopView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IClientStorage, ClientStorage>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IMessageInfoStorage, MessageInfoStorage>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IMessageInfoLogic, MessageInfoLogic>(new
+            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IImplementerLogic, ImplementerLogic>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IImplementerStorage, ImplementerStorage>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractMailWorker, MailKitWorker>(new
+            SingletonLifetimeManager());
             currentContainer.RegisterType<IWorkProcess, WorkModeling>(new
             HierarchicalLifetimeManager());
             return currentContainer;
         }
-
+        private static void MailCheck(object obj) => Container.Resolve<AbstractMailWorker>().MailCheck();
     }
 }

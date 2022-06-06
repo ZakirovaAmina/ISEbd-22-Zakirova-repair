@@ -18,23 +18,22 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-rowreverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area=""
-                               asp-controller="Home" asp-action="Index">Заказы</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Заказы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area=""
-                               asp-controller="Home" asp-action="Privacy">Личные данные</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Личные данные</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area=""
-                               asp-controller="Home" asp-action="Enter">Вход</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Enter">Вход</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area=""
-                               asp-controller="Home" asp-action="Register">Регистрация</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Регистрация</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Mail">Письма</a>
                         </li>
                     </ul>
                 </div>
@@ -52,8 +51,8 @@
             &copy; 2020 - Автомастерская - <a asp-area="" aspcontroller="Home" asp-action="Privacy">Личные данные</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="~/lib/jquery/dist/jquery.min.js"></script>
+     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

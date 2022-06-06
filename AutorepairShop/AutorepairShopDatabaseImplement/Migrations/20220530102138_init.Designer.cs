@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutorepairShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(AutorepairShopDatabase))]
-    [Migration("20220505102648_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220530102138_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,6 +81,33 @@ namespace AutorepairShopDatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Implementers");
+                });
+
+            modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.Property<string>("MessageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateDelivery")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("MessageInfoes");
                 });
 
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Order", b =>
@@ -169,6 +196,15 @@ namespace AutorepairShopDatabaseImplement.Migrations
                     b.ToTable("RepairComponents");
                 });
 
+            modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.HasOne("AutorepairShopDatabaseImplement.Models.Client", "Client")
+                        .WithMany("MessageInfoes")
+                        .HasForeignKey("ClientId");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("AutorepairShopDatabaseImplement.Models.Client", "Client")
@@ -177,7 +213,7 @@ namespace AutorepairShopDatabaseImplement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AutorepairShopDatabaseImplement.Models.Implementer", null)
+                    b.HasOne("AutorepairShopDatabaseImplement.Models.Implementer", "Implementer")
                         .WithMany("Orders")
                         .HasForeignKey("ImplementerId");
 
@@ -188,6 +224,8 @@ namespace AutorepairShopDatabaseImplement.Migrations
                         .IsRequired();
 
                     b.Navigation("Client");
+
+                    b.Navigation("Implementer");
 
                     b.Navigation("Repair");
                 });
@@ -213,6 +251,8 @@ namespace AutorepairShopDatabaseImplement.Migrations
 
             modelBuilder.Entity("AutorepairShopDatabaseImplement.Models.Client", b =>
                 {
+                    b.Navigation("MessageInfoes");
+
                     b.Navigation("Orders");
                 });
 
